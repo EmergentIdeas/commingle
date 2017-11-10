@@ -1,8 +1,9 @@
 
-let commingle = function(toRun) {
+let commingle = function(runnables) {
 	
 	let runnable = function(arg1 = {}, arg2 = {}, next) {
 		let curParts
+		let toRun = [...runnables]
 		
 		const startPart = function() {
 			if(toRun.length > 0) {

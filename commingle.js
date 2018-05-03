@@ -11,15 +11,20 @@ let commingle = function(runnables) {
 				if(typeof curParts == 'function') {
 					curParts = [curParts]
 				}
-				for(const part of curParts) {
-					process.nextTick(function() {
-						part(arg1, arg2, function() {
-							curParts.splice(curParts.indexOf(part), 1)
-							if(curParts.length == 0) {
-								startPart()
-							}
+				if(curParts.length == 0) {
+					startPart()
+				}
+				else {
+					for(const part of curParts) {
+						process.nextTick(function() {
+							part(arg1, arg2, function() {
+								curParts.splice(curParts.indexOf(part), 1)
+								if(curParts.length == 0) {
+									startPart()
+								}
+							})
 						})
-					})
+					}
 				}
 			}
 			else {

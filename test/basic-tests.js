@@ -18,6 +18,18 @@ describe("basic tests for functionality", function() {
 		co([p])()
 	})
 
+	it("no functions", function(done) {
+		co([])({}, {}, () => {
+			done()
+		})
+	})
+
+	it("empty array", function(done) {
+		co([[]])({}, {}, () => {
+			done()
+		})
+	})
+
 	it("line of functions", function(done) {
 		let a = {
 			one: 1
